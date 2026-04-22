@@ -27,16 +27,7 @@ app.get("/", async (req, res) => {
     const object = FeedMessage.toObject(message, { defaults: true });
 
     // Estrai solo i veicoli
-    const vehicles = object.entity
-      .filter(e => e.vehicle)
-      .map(e => ({
-        id: e.id,
-        trip: e.vehicle.trip || null,
-        position: e.vehicle.position || null,
-        timestamp: e.vehicle.timestamp || null
-      }));
-
-    res.json(vehicles);
+res.json(object.entity);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Decoding failed" });
